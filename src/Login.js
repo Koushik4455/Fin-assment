@@ -1,17 +1,33 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Login = () => {
+  const [data,setData] = useState({
+    email :"",
+    password:""
+  })
+  const changeHandle =(e)=>{
+    setData({...data,[e.target.name]:e.target.value})
+  }
+  const { id } = useEffect ()
+  useEffect(()=>{
+    Login ()
+  },[])
+  const submit = (e) =>{
+    e.preventDefault ()
+    axios.put(` https://ring-ring-food.herokuapp.com/api/user/${id}`)
+  }
   return (
     <div>
       <div className='row'>
         <div className='col-md-3'></div>
         <div className='col-md-6 mt-5'>
             <div className='card Registion-card p-5'>
-                <form>
+                <form onSubmit={submit}>
                     <h3 className='text-center mb-5' >Login Form</h3>
-                    <input type="email" className='form-control mb-3 ' placeholder='Enter a Email id' />
-                    <input type="password" className='form-control mb-3' placeholder='Enter a Password' />
+                    <input type="email" name='email' value={data.email} onChange={changeHandle} className='form-control mb-3 ' placeholder='Enter a Email id' />
+                    <input type="password" name='password' value={data.passwordpassword} onChange={changeHandle} className='form-control mb-3' placeholder='Enter a Password' />
                     <Link to=""><button className='btn  login-button'>Submit</button></Link> 
                     <Link to="/Registration"><button className='btn  login-newuser-button'>New User</button></Link>
 

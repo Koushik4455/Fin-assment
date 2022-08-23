@@ -22,6 +22,7 @@ const Registration = () => {
         })
         .then(res=>{
             console.log(res.data)
+            navigator ("/Login")
         })
     }
     function handle(e) {
